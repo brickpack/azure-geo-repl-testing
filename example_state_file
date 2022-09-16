@@ -1,0 +1,95 @@
+{
+      "module": "module.redis_ent",
+      "mode": "managed",
+      "type": "azurerm_redis_enterprise_cluster",
+      "name": "cluster",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "index_key": "eastus2",
+          "schema_version": 0,
+          "attributes": {
+            "hostname": "redis01-database-eastus2-dev.eastus2.redisenterprise.cache.azure.net",
+            "id": "/subscriptions/***********/resourceGroups/eastus2-dev/providers/Microsoft.Cache/redisEnterprise/redis01-database-eastus2-dev",
+            "location": "eastus2",
+            "minimum_tls_version": "1.2",
+            "name": "redis01-database-eastus2-dev",
+            "resource_group_name": "eastus2-dev",
+            "sku_name": "Enterprise_E10-4",
+            "tags": {
+              "environment": "dev",
+              "owner-email": "*********"
+              "service": "database",
+              "tenant": "shared"
+            },
+            "timeouts": null,
+            "zones": [
+              "1",
+              "2",
+              "3"
+            ]
+        estus2",
+            "minimum_tls_version": "1.2",
+            "name": "redis01-database-westus2-dev",
+            "resource_group_name": "westus2-dev",
+            "sku_name": "Enterprise_E10-4",
+            "tags": {
+              "environment": "dev",
+              "owner-email": "**************",
+              "service": "database",
+              "tenant": "shared"
+            },
+            "timeouts": null,
+            "zones": [
+              "1",
+              "2",
+              "3"
+            ]
+          },
+          "sensitive_attributes": [],
+          "private": "************************",
+          "dependencies": [
+            "module.redis_ent.module.conventions-redis.data.azurerm_client_config.current",
+            "module.redis_ent.random_string.randomName"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.redis_ent",
+      "mode": "managed",
+      "type": "azurerm_redis_enterprise_database",
+      "name": "db",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "client_protocol": "Encrypted",
+            "cluster_id": "/subscriptions/*****************/resourceGroups/eastus2-dev/providers/Microsoft.Cache/redisEnterprise/redis01-database-eastus2-dev",
+            "clustering_policy": "EnterpriseCluster",
+            "eviction_policy": "VolatileLRU",
+            "id": "/subscriptions/*****************//resourceGroups/eastus2-dev/providers/Microsoft.Cache/redisEnterprise/redis01-database-eastus2-dev/databases/default",
+            "linked_database_group_nickname": "redis-geo-group",
+            "linked_database_id": [
+              "/subscriptions/*****************/resourceGroups/eastus2-dev/providers/Microsoft.Cache/redisEnterprise/redis01-database-eastus2-dev/databases/default",
+              "/subscriptions//*****************//resourceGroups/westus2-dev/providers/Microsoft.Cache/redisEnterprise/redis01-database-westus2-dev/databases/default"
+            ],
+            "module": [],
+            "name": "default",
+            "port": 10000,
+            "primary_access_key": "<THIS DEFAULTS TO THE KEY OF THE FIRST REGION IN LIST>",
+            "resource_group_name": "eastus2-dev",
+            "secondary_access_key": "<THIS DEFAULTS TO THE KEY OF THE FIRST REGION IN LIST>",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "private": "**********************",
+          "dependencies": [
+            "module.redis_ent.azurerm_redis_enterprise_cluster.cluster",
+            "module.redis_ent.module.conventions-redis.data.azurerm_client_config.current",
+            "module.redis_ent.random_string.randomName"
+          ]
+        }
+      ]
+    },
