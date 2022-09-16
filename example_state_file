@@ -9,11 +9,11 @@
           "index_key": "eastus2",
           "schema_version": 0,
           "attributes": {
-            "hostname": "redis01-database-eastus2-dev.eastus2.redisenterprise.cache.azure.net",
-            "id": "/subscriptions/***********/resourceGroups/eastus2-dev/providers/Microsoft.Cache/redisEnterprise/redis01-database-eastus2-dev",
+            "hostname": "<some name>.eastus2.redisenterprise.cache.azure.net",
+            "id": "/subscriptions/***********/resourceGroups/eastus2-dev/providers/Microsoft.Cache/redisEnterprise/<some name>",
             "location": "eastus2",
             "minimum_tls_version": "1.2",
-            "name": "redis01-database-eastus2-dev",
+            "name": "<some name>",
             "resource_group_name": "eastus2-dev",
             "sku_name": "Enterprise_E10-4",
             "tags": {
@@ -30,7 +30,7 @@
             ]
         estus2",
             "minimum_tls_version": "1.2",
-            "name": "redis01-database-westus2-dev",
+            "name": "<some name>",
             "resource_group_name": "westus2-dev",
             "sku_name": "Enterprise_E10-4",
             "tags": {
@@ -66,14 +66,14 @@
           "schema_version": 0,
           "attributes": {
             "client_protocol": "Encrypted",
-            "cluster_id": "/subscriptions/*****************/resourceGroups/eastus2-dev/providers/Microsoft.Cache/redisEnterprise/redis01-database-eastus2-dev",
+            "cluster_id": "/subscriptions/*****************/resourceGroups/eastus2-dev/providers/Microsoft.Cache/redisEnterprise/<some name>",
             "clustering_policy": "EnterpriseCluster",
             "eviction_policy": "VolatileLRU",
-            "id": "/subscriptions/*****************//resourceGroups/eastus2-dev/providers/Microsoft.Cache/redisEnterprise/redis01-database-eastus2-dev/databases/default",
+            "id": "/subscriptions/*****************//resourceGroups/eastus2-dev/providers/Microsoft.Cache/redisEnterprise/<some name>/databases/default",
             "linked_database_group_nickname": "redis-geo-group",
             "linked_database_id": [
-              "/subscriptions/*****************/resourceGroups/eastus2-dev/providers/Microsoft.Cache/redisEnterprise/redis01-database-eastus2-dev/databases/default",
-              "/subscriptions//*****************//resourceGroups/westus2-dev/providers/Microsoft.Cache/redisEnterprise/redis01-database-westus2-dev/databases/default"
+              "/subscriptions/*****************/resourceGroups/eastus2-dev/providers/Microsoft.Cache/redisEnterprise/<some name>/databases/default",
+              "/subscriptions//*****************//resourceGroups/westus2-dev/providers/Microsoft.Cache/redisEnterprise/<some name>/databases/default"
             ],
             "module": [],
             "name": "default",
