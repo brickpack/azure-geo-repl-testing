@@ -1,5 +1,5 @@
 module "conventions-redis" {
-  for_each = toset(var.locations)
+  for_each     = toset(var.locations)
   source       = "<special module to handle naming conventions>"
   resource     = "redis"
   environment  = var.environment
@@ -18,10 +18,8 @@ resource "random_string" "randomName" {
 }
 
 resource "azurerm_redis_enterprise_cluster" "cluster" {
-  for_each = toset(var.locations)
-  name     = join("-", 
-      [local.resource_prefix, 
-          var.useRandomNamePart ? "${local.service_name}-${random_string.randomName.result}" : local.service_name, each.key, var.environment])
+  for_each            = toset(var.locations)
+  name                = join("-", [local.resource_prefix, var.useRandomNamePart ? "${local.service_name}-${random_string.randomName.result}" : local.service_name, each.key, var.environment])
   resource_group_name = module.conventions-redis[each.key].resource_group_name
   location            = each.key 
 
@@ -40,8 +38,7 @@ resource "azurerm_redis_enterprise_cluster" "cluster" {
 }
 
 resource "azurerm_redis_enterprise_database" "db" {
-  name                = "default"
-
+  name              = "default"
   cluster_id        = azurerm_redis_enterprise_cluster.cluster["${var.locations[0]}"].id
   clustering_policy = var.clustering_policy
   client_protocol   = var.client_protocol
@@ -67,13 +64,4 @@ terraform {
       version = ">= 3.9.0"
     }
   }
-}
-
-locals {
-  service_name = join("-", flatten([
-    var.servicegroup,
-    var.pod != "" ? [var.pod] : [],
-    var.stenantid != "" ? [var.stenantid] : []
-  ]))
-  resource_prefix = format("%s%02d", "redis", min(99, max(1, var.id)))
 }
