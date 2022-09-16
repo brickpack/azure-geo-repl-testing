@@ -1,21 +1,3 @@
-# Common params
-variable "environment" {}
-variable "servicegroup" {}
-variable "ownerEmail" {}
-variable "stenantid" { default = "" }
-variable "utenantid" { default = "" }
-variable "pod" { default = "" }
-variable "id" {
-  type        = number
-  default     = 1
-  description = "Changes the name of the instance. This is unsual to change from deafult"
-}
-
-variable "useRandomNamePart" {
-  type        = bool
-  default     = false
-  description = "(Optional) Add random string to name of redis server."
-}
 
 # Redis parameters
 variable "locations" {
@@ -80,4 +62,23 @@ variable "port" {
   type        = number
   default     = 10000
   description = "* Changing this forces a new Redis Enterprise Database to be created. TCP port of the database endpoint. Specified at create time. Defaults to an available port."
+}
+
+# Common params
+variable "environment" {}
+variable "servicegroup" {}
+variable "ownerEmail" {}
+variable "stenantid" { default = "" }
+variable "utenantid" { default = "" }
+variable "pod" { default = "" }
+variable "id" {
+  type        = number
+  default     = 1
+  description = "Changes the name of the instance. This is unsual to change from deafult"
+}
+
+variable "useRandomNamePart" {
+  type        = bool
+  default     = false
+  description = "(Optional) Add random string to name of redis server."
 }
