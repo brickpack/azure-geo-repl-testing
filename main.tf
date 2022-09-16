@@ -1,5 +1,5 @@
 module "conventions-redis" {
-    for_each = toset(var.locations)
+  for_each = toset(var.locations)
   source       = "<special module to handle naming conventions>"
   resource     = "redis"
   environment  = var.environment
@@ -18,28 +18,25 @@ resource "random_string" "randomName" {
 }
 
 resource "azurerm_redis_enterprise_cluster" "cluster" {
-    for_each = toset(var.locations)
-    name                = join("-", [
-    local.resource_prefix,
-    var.useRandomNamePart ? "${local.service_name}-${random_string.randomName.result}" : local.service_name,
-    each.key,
-    var.environment
-  ])
-     resource_group_name = module.conventions-redis[each.key].resource_group_name
-     location            = each.key 
+  for_each = toset(var.locations)
+  name     = join("-", 
+      [local.resource_prefix, 
+          var.useRandomNamePart ? "${local.service_name}-${random_string.randomName.result}" : local.service_name, each.key, var.environment])
+  resource_group_name = module.conventions-redis[each.key].resource_group_name
+  location            = each.key 
 
-     sku_name            = var.sku
-     minimum_tls_version = "1.2"
+  sku_name            = var.sku
+  minimum_tls_version = "1.2"
   tags                = module.conventions-redis[each.key].service_tags
 
   zones = length(var.zones) > 0 ? var.zones : null
 
   lifecycle {
-    ignore_changes = [
+      ignore_changes = [
       name,
       zones
-    ]
-  }
+      ]
+}
 }
 
 resource "azurerm_redis_enterprise_database" "db" {
