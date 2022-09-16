@@ -82,3 +82,12 @@ variable "useRandomNamePart" {
   default     = false
   description = "(Optional) Add random string to name of redis server."
 }
+
+locals {
+  service_name = join("-", flatten([
+    var.servicegroup,
+    var.pod != "" ? [var.pod] : [],
+    var.stenantid != "" ? [var.stenantid] : []
+  ]))
+  resource_prefix = format("%s%02d", "redis", min(99, max(1, var.id)))
+}
